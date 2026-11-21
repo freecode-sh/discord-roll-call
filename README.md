@@ -24,7 +24,7 @@ The site and command demo work without a Discord app. `npm run build` checks the
 1. Create a Discord app in the [Developer Portal](https://discord.com/developers/applications). In **Installation**, enable **Guild Install** with the `applications.commands` scope. Use its install link to add the app to a server you administer.
 2. Copy the **Public Key** from the app’s **General Information**. In Freecode, save it as `DISCORD_PUBLIC_KEY` for both environments in the setup card, then select **Publish** or **Update site**. For a first deploy with Wrangler, copy `.dev.vars.example` to `.dev.vars`, paste the key after `DISCORD_PUBLIC_KEY=`, and run `npm run deploy -- --secrets-file .dev.vars`.
 3. Set **Interactions Endpoint URL** to `https://<your-site>/interactions`. Discord will send a signed PING to verify the URL.
-4. Copy `.env.register.example` to `.env.register`, fill in your app ID and bot token locally, then run `npm run register`. Set `DISCORD_TEST_GUILD_ID` to register the commands immediately in a test server. The Worker itself does not need the bot token.
+4. Copy `discord-register.env.example` to `.env.register`, fill in your app ID and bot token locally, then run `npm run register`. Set `DISCORD_TEST_GUILD_ID` to register the commands immediately in a test server.
 5. Run `/ping` and `/check-in` in the Discord server.
 
 ## Make it yours

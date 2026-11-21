@@ -2,7 +2,6 @@ node_modules/
 .wrangler/
 dist/
 .env*
-!.env.register.example
 .dev.vars*
 !.dev.vars.example
 .DS_Store
