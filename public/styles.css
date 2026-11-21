@@ -486,3 +486,13 @@ a {
   .credential-alert { grid-template-columns: auto minmax(0, 1fr); gap: 8px; padding: 12px; }
   .credential-alert .btn { grid-column: 2; justify-self: start; }
 }
+
+@media (width < 680px) {
+  .cmd-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .cmd-card { display: flex; flex-direction: column; justify-content: space-between; padding: 10px; }
+  .cmd-actions .btn { width: 100%; }
+}
+
+@media (width < 340px) {
+  .cmd-list { grid-template-columns: 1fr; }
+}

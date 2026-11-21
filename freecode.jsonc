@@ -7,8 +7,7 @@
     "cover": { "path": "docs/art/catalog-cover.webp", "caption": "Discord Bot Starter cover" },
     "screenshots": [
       { "path": "docs/art/console.webp", "caption": "Dashboard" },
-      { "path": "docs/art/setup.webp", "caption": "Setup guide" },
-      { "path": "docs/art/console-mobile.webp", "caption": "Mobile dashboard" }
+      { "path": "docs/art/replies.webp", "caption": "Command replies" }
     ]
   },
   "workspace": { "runtime": "worker" }
