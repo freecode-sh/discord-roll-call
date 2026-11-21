@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11151c">
+  <meta name="description" content="A tiny, open-source Discord bot for daily check-ins.">
+  <title>Roll Call · Daily check-ins for Discord</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" type="image/webp" href="/media/icon.webp">
+  <script type="module" src="/demo.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead shell">
+    <a class="wordmark" href="/" aria-label="Roll Call home"><span class="signal" aria-hidden="true"></span>Roll Call</a>
+    <nav aria-label="Main navigation"><a href="#commands">Commands</a><a href="#setup">Setup</a></nav>
+  </header>
+  <main id="main" class="shell">
+    <section class="hero" aria-labelledby="title">
+      <div class="intro">
+        <h1 id="title">A little check-in goes a long way.</h1>
+        <p>Give your Discord server a tiny daily check-in. Say you’re here with one slash command, and take the bot in your own direction from there.</p>
+        <div class="actions">
+          <a class="button primary" href="#commands">Try the demo <span aria-hidden="true">↘</span></a>
+          <a class="button secondary" href="#setup">Set up the bot</a>
+        </div>
+      </div>
+      <img class="radio" src="/media/radio.webp" width="1122" height="1402" fetchpriority="high" alt="Orange radio with a glowing checkmark on its display">
+    </section>
+    <section id="commands" class="section split" aria-labelledby="command-title">
+      <div class="section-copy">
+        <h2 id="command-title">Try it out.</h2>
+        <p>Send a command to the Worker and see the same reply you’d get in Discord. You can try it without connecting a server.</p>
+      </div>
+      <div class="console">
+        <div class="console-header"><span class="status-light" aria-hidden="true"></span> Command demo</div>
+        <div class="command-actions" aria-label="Demo commands">
+          <button type="button" class="button primary command" id="check-in">/check-in</button>
+          <button type="button" class="button secondary command" id="ping">/ping</button>
+          <button type="button" class="reset" id="reset" hidden>Reset</button>
+        </div>
+        <output class="console-output" id="reply" aria-live="polite"><span class="prompt-mark" aria-hidden="true">›</span><span id="reply-text">Ready for your first check-in.</span></output>
+        <noscript><p>Enable JavaScript to try the demo. The setup guide below works without it.</p></noscript>
+      </div>
+    </section>
+    <section id="setup" class="section split" aria-labelledby="setup-title">
+      <div class="section-copy">
+        <h2 id="setup-title">Set up Roll Call.</h2>
+        <p>Run your own copy on a Worker. The starter acknowledges check-ins without storing them, so you can add a history or a daily count as your first change.</p>
+      </div>
+      <ol class="steps">
+        <li><strong>Create a Discord app.</strong><span>Use the <a href="https://discord.com/developers/applications">Discord Developer Portal</a> and enable Guild Install with <code>applications.commands</code>.</span></li>
+        <li><strong>Deploy the Worker.</strong><span>Set <code>DISCORD_PUBLIC_KEY</code> in your Worker’s environment. Set the Interaction Endpoint URL to your Worker’s <code>/interactions</code> route.</span></li>
+        <li><strong>Register the commands.</strong><span>Set your app ID and bot token locally, run <code>npm run register</code>, and try <code>/check-in</code> in your server.</span></li>
+      </ol>
+    </section>
+  </main>
+  <footer class="footer shell"><span>Roll Call</span><span>Open-source Discord bot by Freecode</span></footer>
+</body>
+</html>

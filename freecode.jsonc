@@ -1,0 +1,13 @@
+{
+  "template": {
+    "slug": "discord-roll-call",
+    "title": "Roll Call for Discord",
+    "description": "A small Discord bot with signed slash commands, a Worker backend, and an interactive website.",
+    "tags": ["Discord", "Bots", "JavaScript"],
+    "cover": { "path": "docs/art/catalog-cover.webp", "caption": "Orange Roll Call radio artwork" },
+    "screenshots": [
+      { "path": "docs/art/website.webp", "caption": "Roll Call landing page and command demo" }
+    ]
+  },
+  "workspace": { "runtime": "worker" }
+}
