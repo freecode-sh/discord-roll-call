@@ -1,9 +1,15 @@
 import { commands } from './commands.js'
 
+export function missingDiscordCredentials(env) {
+  const missing = []
+  if (!/^\d{17,20}$/.test(env.DISCORD_APP_ID ?? '')) missing.push('DISCORD_APP_ID')
+  if (!env.DISCORD_BOT_TOKEN?.trim()) missing.push('DISCORD_BOT_TOKEN')
+  if (!/^[a-f0-9]{64}$/i.test(env.DISCORD_PUBLIC_KEY ?? '')) missing.push('DISCORD_PUBLIC_KEY')
+  return missing
+}
+
 export function discordCredentialsReady(env) {
-  return /^\d{17,20}$/.test(env.DISCORD_APP_ID ?? '')
-    && Boolean(env.DISCORD_BOT_TOKEN?.trim())
-    && /^[a-f0-9]{64}$/i.test(env.DISCORD_PUBLIC_KEY ?? '')
+  return missingDiscordCredentials(env).length === 0
 }
 
 export async function registerCommands(env, guildId) {

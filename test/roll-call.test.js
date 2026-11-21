@@ -24,13 +24,16 @@ test('reports Worker and Discord configuration status without returning any Disc
   const configured = await worker.fetch(new Request(url), env)
   assert.equal(configured.status, 200)
   assert.equal(configured.headers.get('cache-control'), 'no-store')
-  assert.deepEqual(await configured.json(), { worker: 'online', discordConfigured: true })
+  assert.deepEqual(await configured.json(), { worker: 'online', discordConfigured: true, discordMissing: [] })
 
-  for (const missing of [
-    {}, { ...env, DISCORD_APP_ID: '123' }, { ...env, DISCORD_BOT_TOKEN: '' }, { ...env, DISCORD_PUBLIC_KEY: 'not-a-key' },
+  for (const [credentials, expectedMissing] of [
+    [{}, Object.keys(env)],
+    [{ ...env, DISCORD_APP_ID: '123' }, ['DISCORD_APP_ID']],
+    [{ ...env, DISCORD_BOT_TOKEN: '' }, ['DISCORD_BOT_TOKEN']],
+    [{ ...env, DISCORD_PUBLIC_KEY: 'not-a-key' }, ['DISCORD_PUBLIC_KEY']],
   ]) {
-    const response = await worker.fetch(new Request(url), missing)
-    assert.deepEqual(await response.json(), { worker: 'online', discordConfigured: false })
+    const response = await worker.fetch(new Request(url), credentials)
+    assert.deepEqual(await response.json(), { worker: 'online', discordConfigured: false, discordMissing: expectedMissing })
   }
 
   const post = await worker.fetch(new Request(url, { method: 'POST' }), env)

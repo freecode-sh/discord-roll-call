@@ -1,6 +1,6 @@
 import { commandReply } from './commands.js'
 import { discordEndpoint } from './discord.js'
-import { discordCredentialsReady } from './register.js'
+import { missingDiscordCredentials } from './register.js'
 
 export default {
   fetch(request, env, ctx) {
@@ -8,9 +8,11 @@ export default {
     if (url.pathname === '/interactions') return discordEndpoint(request, env, ctx)
     if (url.pathname === '/api/status') {
       if (request.method !== 'GET') return new Response('Method not allowed', { status: 405, headers: { allow: 'GET' } })
+      const discordMissing = missingDiscordCredentials(env)
       return Response.json({
         worker: 'online',
-        discordConfigured: discordCredentialsReady(env),
+        discordConfigured: discordMissing.length === 0,
+        discordMissing,
       }, { headers: { 'cache-control': 'no-store' } })
     }
     if (url.pathname === '/api/demo') {
