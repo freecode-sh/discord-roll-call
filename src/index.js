@@ -5,6 +5,13 @@ export default {
   fetch(request, env) {
     const url = new URL(request.url)
     if (url.pathname === '/interactions') return discordEndpoint(request, env)
+    if (url.pathname === '/api/status') {
+      if (request.method !== 'GET') return new Response('Method not allowed', { status: 405, headers: { allow: 'GET' } })
+      return Response.json({
+        worker: 'online',
+        discordConfigured: /^[a-f0-9]{64}$/i.test(env.DISCORD_PUBLIC_KEY ?? ''),
+      }, { headers: { 'cache-control': 'no-store' } })
+    }
     if (url.pathname === '/api/demo') {
       if (request.method !== 'GET') return new Response('Method not allowed', { status: 405, headers: { allow: 'GET' } })
       const content = commandReply(url.searchParams.get('command'))

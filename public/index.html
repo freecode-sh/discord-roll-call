@@ -3,59 +3,93 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#11151c">
-  <meta name="description" content="A tiny, open-source Discord bot for daily check-ins.">
-  <title>Roll Call · Daily check-ins for Discord</title>
+  <meta name="theme-color" content="#111318">
+  <meta name="description" content="Try Roll Call’s slash commands and connect your own Discord bot.">
+  <title>Roll Call · Discord bot dashboard</title>
   <link rel="stylesheet" href="/styles.css">
   <link rel="icon" type="image/webp" href="/media/icon.webp">
   <script type="module" src="/demo.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <header class="masthead shell">
-    <a class="wordmark" href="/" aria-label="Roll Call home"><span class="signal" aria-hidden="true"></span>Roll Call</a>
-    <nav aria-label="Main navigation"><a href="#commands">Commands</a><a href="#setup">Setup</a></nav>
+  <header class="topbar">
+    <div class="shell masthead">
+      <a class="wordmark" href="#console"><span class="signal-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Roll Call</a>
+      <nav aria-label="Main navigation">
+        <a href="#console" data-view="console" aria-current="page">Console</a>
+        <a href="#setup" data-view="setup">Setup</a>
+      </nav>
+      <a class="source" href="https://github.com/freecode-sh/discord-roll-call">Source <span aria-hidden="true">↗</span></a>
+    </div>
   </header>
   <main id="main" class="shell">
-    <section class="hero" aria-labelledby="title">
-      <div class="intro">
-        <h1 id="title">A little check-in goes a long way.</h1>
-        <p>Give your Discord server a tiny daily check-in. Say you’re here with one slash command, and take the bot in your own direction from there.</p>
-        <div class="actions">
-          <a class="button primary" href="#commands">Try the demo <span aria-hidden="true">↘</span></a>
-          <a class="button secondary" href="#setup">Set up the bot</a>
-        </div>
+    <section id="console" aria-labelledby="console-title">
+      <header class="page-heading">
+        <div><h1 id="console-title">Command console</h1><p>Try the bot’s slash commands before connecting Discord.</p></div>
+        <span id="worker-status" class="worker-status" role="status" data-state="checking">Checking Worker</span>
+      </header>
+      <div class="dashboard">
+        <section class="log" aria-labelledby="log-title">
+          <div class="panel-heading">
+            <h2 id="log-title">Dispatch log</h2>
+            <button type="button" class="quiet" id="reset" disabled>Clear log</button>
+          </div>
+          <div class="keystrip" aria-label="Run a command">
+            <span>Run</span>
+            <button type="button" class="command primary" data-command="check-in"><code><b>/</b>check-in</code></button>
+            <button type="button" class="command" data-command="ping"><code><b>/</b>ping</code></button>
+          </div>
+          <div class="log-content" id="log-content">
+            <div class="log-head" aria-hidden="true"><span>Time / latency</span><span>Worker reply</span></div>
+            <p id="activity-empty" class="empty">Ready to run a command.</p>
+            <ol class="activity-list" id="activity-list" aria-label="Command runs" hidden></ol>
+            <span id="reply" class="sr-only" role="status"></span>
+          </div>
+          <noscript><p class="empty">Enable JavaScript to run commands.</p></noscript>
+        </section>
+        <aside class="reference" aria-label="Discord and command reference">
+          <section class="status-panel" aria-labelledby="discord-title">
+            <h2 id="discord-title">Discord integration</h2>
+            <p id="signing-key" class="key-status" data-state="checking">Checking public key</p>
+            <a href="#setup" class="text-action">Open setup <span aria-hidden="true">→</span></a>
+          </section>
+          <section class="command-reference" aria-labelledby="command-title">
+            <h2 id="command-title">Commands</h2>
+            <dl>
+              <div><dt><code>/check-in</code></dt><dd>Acknowledges a daily check-in.</dd></div>
+              <div><dt><code>/ping</code></dt><dd>Checks that the Worker responds.</dd></div>
+            </dl>
+          </section>
+        </aside>
       </div>
-      <img class="radio" src="/media/radio.webp" width="1122" height="1402" fetchpriority="high" alt="Orange radio with a glowing checkmark on its display">
     </section>
-    <section id="commands" class="section split" aria-labelledby="command-title">
-      <div class="section-copy">
-        <h2 id="command-title">Try it out.</h2>
-        <p>Send a command to the Worker and see the same reply you’d get in Discord. You can try it without connecting a server.</p>
-      </div>
-      <div class="console">
-        <div class="console-header"><span class="status-light" aria-hidden="true"></span> Command demo</div>
-        <div class="command-actions" aria-label="Demo commands">
-          <button type="button" class="button primary command" id="check-in">/check-in</button>
-          <button type="button" class="button secondary command" id="ping">/ping</button>
-          <button type="button" class="reset" id="reset" hidden>Reset</button>
-        </div>
-        <output class="console-output" id="reply" aria-live="polite"><span class="prompt-mark" aria-hidden="true">›</span><span id="reply-text">Ready for your first check-in.</span></output>
-        <noscript><p>Enable JavaScript to try the demo. The setup guide below works without it.</p></noscript>
+
+    <section id="setup" aria-labelledby="setup-title" hidden>
+      <header class="page-heading">
+        <div><h1 id="setup-title">Connect Discord</h1><p>Set up a Discord app to run Roll Call in your server.</p></div>
+        <a class="external" href="https://discord.com/developers/applications">Developer Portal <span aria-hidden="true">↗</span></a>
+      </header>
+      <div class="dashboard setup-dashboard">
+        <section class="setup-panel" aria-labelledby="steps-title">
+          <div class="panel-heading"><h2 id="steps-title">Installation</h2></div>
+          <ol class="steps">
+            <li><div><h3>Create a Discord app</h3><p>Enable Guild Install with the <code>applications.commands</code> scope. Use the install link to add the app to a server you administer.</p></div></li>
+            <li><div><h3>Set the public key and publish</h3><p>Copy the Public Key from General Information in Discord. Save it as <code>DISCORD_PUBLIC_KEY</code> in Freecode and publish your site. Set the Discord Interactions Endpoint URL to your published site’s <code>/interactions</code> route.</p></div></li>
+            <li><div><h3>Register and test the slash commands</h3><p>Copy <code>.env.register.example</code> to <code>.env.register</code> on your computer. Add your Application ID and bot token, then run <code>npm run register</code>. Try <code>/ping</code> in your Discord server.</p></div></li>
+          </ol>
+        </section>
+        <aside class="reference" aria-label="Endpoint">
+          <section class="status-panel">
+            <h2>Interactions endpoint</h2>
+            <p id="endpoint-description">Discord calls this route over public HTTPS.</p>
+            <code id="endpoint">/interactions</code>
+            <button type="button" id="copy-endpoint">Copy endpoint</button>
+            <span id="copy-status" class="sr-only" role="status"></span>
+          </section>
+        </aside>
       </div>
     </section>
-    <section id="setup" class="section split" aria-labelledby="setup-title">
-      <div class="section-copy">
-        <h2 id="setup-title">Set up Roll Call.</h2>
-        <p>Run your own copy on a Worker. The starter acknowledges check-ins without storing them, so you can add a history or a daily count as your first change.</p>
-      </div>
-      <ol class="steps">
-        <li><strong>Create a Discord app.</strong><span>Use the <a href="https://discord.com/developers/applications">Discord Developer Portal</a> and enable Guild Install with <code>applications.commands</code>.</span></li>
-        <li><strong>Deploy the Worker.</strong><span>Set <code>DISCORD_PUBLIC_KEY</code> in your Worker’s environment. Set the Interaction Endpoint URL to your Worker’s <code>/interactions</code> route.</span></li>
-        <li><strong>Register the commands.</strong><span>Set your app ID and bot token locally, run <code>npm run register</code>, and try <code>/check-in</code> in your server.</span></li>
-      </ol>
-    </section>
+    <footer class="footer"><a href="https://freecode.sh/templates/discord-roll-call">Roll Call on Freecode <span aria-hidden="true">↗</span></a></footer>
   </main>
-  <footer class="footer shell"><span>Roll Call</span><span>Open-source Discord bot by Freecode</span></footer>
 </body>
 </html>

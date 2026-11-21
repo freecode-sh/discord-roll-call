@@ -19,6 +19,23 @@ function signed(payload, { altered = false, age = 0 } = {}) {
   })
 }
 
+test('reports Worker and Discord configuration status without exposing the signing key', async () => {
+  const url = 'https://roll-call.test/api/status'
+  const configured = await worker.fetch(new Request(url), env)
+  assert.equal(configured.status, 200)
+  assert.equal(configured.headers.get('cache-control'), 'no-store')
+  assert.deepEqual(await configured.json(), { worker: 'online', discordConfigured: true })
+
+  for (const missing of [{}, { DISCORD_PUBLIC_KEY: 'not-a-key' }]) {
+    const response = await worker.fetch(new Request(url), missing)
+    assert.deepEqual(await response.json(), { worker: 'online', discordConfigured: false })
+  }
+
+  const post = await worker.fetch(new Request(url, { method: 'POST' }), env)
+  assert.equal(post.status, 405)
+  assert.equal(post.headers.get('allow'), 'GET')
+})
+
 test('verifies PING signatures and rejects altered, stale, or oversized requests', async () => {
   const ping = { type: 1 }
   assert.deepEqual(await (await worker.fetch(signed(ping), env)).json(), ping)

@@ -2,11 +2,13 @@
   "template": {
     "slug": "discord-roll-call",
     "title": "Roll Call for Discord",
-    "description": "A small Discord bot with signed slash commands, a Worker backend, and an interactive website.",
+    "description": "A Discord bot starter with signed slash commands, a live command console, and a guided setup.",
     "tags": ["Discord", "Bots", "JavaScript"],
-    "cover": { "path": "docs/art/catalog-cover.webp", "caption": "Orange Roll Call radio artwork" },
+    "cover": { "path": "docs/art/catalog-cover.webp", "caption": "Roll Call command console" },
     "screenshots": [
-      { "path": "docs/art/website.webp", "caption": "Roll Call landing page and command demo" }
+      { "path": "docs/art/console.webp", "caption": "Command console with live Worker replies" },
+      { "path": "docs/art/setup.webp", "caption": "Discord installation and interaction endpoint" },
+      { "path": "docs/art/console-mobile.webp", "caption": "Command console on mobile" }
     ]
   },
   "workspace": { "runtime": "worker" }
