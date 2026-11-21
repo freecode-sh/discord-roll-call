@@ -1,4 +1,5 @@
 import { commandReply } from './commands.js'
+import { discordCredentialsReady, registerCommands } from './register.js'
 
 const encoder = new TextEncoder()
 const bodyLimit = 32_768
@@ -47,12 +48,23 @@ async function signedInteraction(request, publicKey) {
   }
 }
 
-export async function discordEndpoint(request, env) {
+export async function discordEndpoint(request, env, ctx) {
   if (request.method !== 'POST') return new Response('Method not allowed', { status: 405, headers: { allow: 'POST' } })
-  if (!/^[a-f0-9]{64}$/i.test(env.DISCORD_PUBLIC_KEY ?? '')) return new Response('Discord setup is required', { status: 503 })
+  if (!discordCredentialsReady(env)) return new Response('Discord setup is required', { status: 503 })
   const interaction = await signedInteraction(request, env.DISCORD_PUBLIC_KEY)
   if (!interaction) return new Response('Invalid interaction signature or body', { status: 401 })
-  if (interaction.type === 1) return Response.json({ type: 1 })
+  if (interaction.application_id !== undefined && interaction.application_id !== env.DISCORD_APP_ID) {
+    return new Response('Interaction belongs to another application', { status: 401 })
+  }
+
+  if (interaction.type === 1) {
+    // Discord sends a signed PING when saving the endpoint. Reply promptly and
+    // upsert our commands in the background without overwriting other commands.
+    ctx.waitUntil(registerCommands(env).catch(error => {
+      console.error('Roll Call command registration failed:', error.message)
+    }))
+    return Response.json({ type: 1 })
+  }
   if (interaction.type !== 2) return new Response('Unsupported interaction', { status: 400 })
 
   const content = commandReply(interaction.data?.name) ?? 'Unknown Roll Call command.'

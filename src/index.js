@@ -1,15 +1,16 @@
 import { commandReply } from './commands.js'
 import { discordEndpoint } from './discord.js'
+import { discordCredentialsReady } from './register.js'
 
 export default {
-  fetch(request, env) {
+  fetch(request, env, ctx) {
     const url = new URL(request.url)
-    if (url.pathname === '/interactions') return discordEndpoint(request, env)
+    if (url.pathname === '/interactions') return discordEndpoint(request, env, ctx)
     if (url.pathname === '/api/status') {
       if (request.method !== 'GET') return new Response('Method not allowed', { status: 405, headers: { allow: 'GET' } })
       return Response.json({
         worker: 'online',
-        discordConfigured: /^[a-f0-9]{64}$/i.test(env.DISCORD_PUBLIC_KEY ?? ''),
+        discordConfigured: discordCredentialsReady(env),
       }, { headers: { 'cache-control': 'no-store' } })
     }
     if (url.pathname === '/api/demo') {

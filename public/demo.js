@@ -30,12 +30,12 @@ async function readWorkerStatus() {
     if (status.worker !== 'online' || typeof status.discordConfigured !== 'boolean') throw new Error('Invalid status')
     worker.textContent = 'Worker online'
     worker.dataset.state = 'online'
-    key.textContent = status.discordConfigured ? 'Public key configured' : 'Public key needed'
+    key.textContent = status.discordConfigured ? 'Credentials saved' : 'Discord setup needed'
     key.dataset.state = status.discordConfigured ? 'ready' : 'missing'
   } catch {
     worker.textContent = 'Worker unavailable'
     worker.dataset.state = 'unavailable'
-    key.textContent = 'Couldn’t check public key'
+    key.textContent = 'Couldn’t check Discord setup'
     key.dataset.state = 'unavailable'
   }
 }

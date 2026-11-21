@@ -22,10 +22,11 @@ The site and command demo work without a Discord app. `npm run build` checks the
 ## Deploy your bot
 
 1. Create a Discord app in the [Developer Portal](https://discord.com/developers/applications). In **Installation**, enable **Guild Install** with the `applications.commands` scope. Use its install link to add the app to a server you administer.
-2. Copy the **Public Key** from the app’s **General Information**. In Freecode, save it as `DISCORD_PUBLIC_KEY` for both environments in the setup card, then select **Publish** or **Update site**. For a first deploy with Wrangler, copy `.dev.vars.example` to `.dev.vars`, paste the key after `DISCORD_PUBLIC_KEY=`, and run `npm run deploy -- --secrets-file .dev.vars`.
-3. Set **Interactions Endpoint URL** to `https://<your-site>/interactions`. Discord will send a signed PING to verify the URL.
-4. Copy `discord-register.env.example` to `.env.register`, fill in your app ID and bot token locally, then run `npm run register`. Set `DISCORD_TEST_GUILD_ID` to register the commands immediately in a test server.
-5. Run `/ping` and `/check-in` in the Discord server.
+2. Copy the **Application ID** and **Public Key** from **General Information** and the **token** from **Bot**. Save all three in Freecode’s setup card, then choose **Publish** or **Update site**. For a first deploy with Wrangler, copy `.dev.vars.example` to `.dev.vars`, fill in the three values, and run `npm run deploy -- --secrets-file .dev.vars`.
+3. In Discord’s **General Information**, set **Interactions Endpoint URL** to `https://<your-site>/interactions` and save. Discord sends a signed PING. Roll Call verifies it with the public key, then uses the Application ID and bot token to register `/ping` and `/check-in` in the background.
+4. Try both commands in your server. If they’re missing, check the Worker logs and confirm that the Application ID, bot token, and public key came from the same app. Save the endpoint again to retry.
+
+For manual registration or testing in one guild, copy `discord-register.env.example` to `.env.register`, fill in the Application ID and bot token, and run `npm run register`. Set `DISCORD_TEST_GUILD_ID` for a guild-only registration.
 
 ## Make it yours
 

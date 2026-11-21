@@ -50,7 +50,7 @@
         <aside class="reference" aria-label="Discord and command reference">
           <section class="status-panel" aria-labelledby="discord-title">
             <h2 id="discord-title">Discord integration</h2>
-            <p id="signing-key" class="key-status" data-state="checking">Checking public key</p>
+            <p id="signing-key" class="key-status" data-state="checking">Checking Discord setup</p>
             <a href="#setup" class="text-action">Open setup <span aria-hidden="true">→</span></a>
           </section>
           <section class="command-reference" aria-labelledby="command-title">
@@ -74,8 +74,8 @@
           <div class="panel-heading"><h2 id="steps-title">Installation</h2></div>
           <ol class="steps">
             <li><div><h3>Create a Discord app</h3><p>Enable Guild Install with the <code>applications.commands</code> scope. Use the install link to add the app to a server you administer.</p></div></li>
-            <li><div><h3>Set the public key and publish</h3><p>Copy the Public Key from General Information in Discord. Save it as <code>DISCORD_PUBLIC_KEY</code> in Freecode and publish your site. Set the Discord Interactions Endpoint URL to your published site’s <code>/interactions</code> route.</p></div></li>
-            <li><div><h3>Register and test the slash commands</h3><p>Copy <code>discord-register.env.example</code> to <code>.env.register</code> on your computer. Add your Application ID and bot token, then run <code>npm run register</code>. Try <code>/ping</code> in your Discord server.</p></div></li>
+            <li><div><h3>Add your Discord credentials</h3><p>Copy the Application ID and Public Key from General Information, and the token from Bot. Save all three in the Freecode setup card and publish your site.</p></div></li>
+            <li><div><h3>Connect Discord and try a command</h3><p>In General Information, set the Interactions Endpoint URL to your published endpoint and save. Roll Call registers its commands when Discord verifies the endpoint. Try <code>/ping</code> in your server.</p></div></li>
           </ol>
         </section>
         <aside class="reference" aria-label="Endpoint">

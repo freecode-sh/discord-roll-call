@@ -3,6 +3,6 @@
   "name": "freecode-roll-call",
   "main": "src/index.js",
   "compatibility_date": "2026-07-31",
-  "secrets": { "required": ["DISCORD_PUBLIC_KEY"] },
+  "secrets": { "required": ["DISCORD_APP_ID", "DISCORD_BOT_TOKEN", "DISCORD_PUBLIC_KEY"] },
   "assets": { "directory": "./public", "binding": "ASSETS" }
 }
