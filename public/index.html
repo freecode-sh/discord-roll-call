@@ -2,94 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#111318">
-  <meta name="description" content="Try Roll Call’s slash commands and connect your own Discord bot.">
-  <title>Roll Call · Discord bot dashboard</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Try two Discord slash commands and connect your own bot.">
+  <title>Discord Bot Starter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
-  <link rel="icon" type="image/webp" href="/media/icon.webp">
-  <script type="module" src="/demo.js"></script>
 </head>
 <body>
-  <a class="skip" href="#main">Skip to content</a>
-  <header class="topbar">
-    <div class="shell masthead">
-      <a class="wordmark" href="#console"><span class="signal-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Roll Call</a>
-      <nav aria-label="Main navigation">
-        <a href="#console" data-view="console" aria-current="page">Console</a>
-        <a href="#setup" data-view="setup">Setup</a>
-      </nav>
-      <a class="source" href="https://github.com/freecode-sh/discord-roll-call">Source <span aria-hidden="true">↗</span></a>
+  <a class="skip-link" href="#console">Skip to content</a>
+  <header class="site-bar">
+    <div class="site-bar-inner">
+      <a href="https://freecode.sh/templates/discord-roll-call">Freecode templates</a>
+      <a class="source-link" href="https://github.com/freecode-sh/discord-roll-call">Source <span aria-hidden="true">↗</span></a>
     </div>
   </header>
-  <main id="main" class="shell">
-    <section id="console" aria-labelledby="console-title">
-      <header class="page-heading">
-        <div><h1 id="console-title">Command console</h1><p>Try the bot’s slash commands before connecting Discord.</p></div>
-        <span id="worker-status" class="worker-status" role="status" data-state="checking">Checking Worker</span>
-      </header>
-      <div class="dashboard">
-        <section class="log" aria-labelledby="log-title">
-          <div class="panel-heading">
-            <h2 id="log-title">Dispatch log</h2>
-            <button type="button" class="quiet" id="reset" disabled>Clear log</button>
-          </div>
-          <div class="keystrip" aria-label="Run a command">
-            <span>Run</span>
-            <button type="button" class="command primary" data-command="check-in"><code><b>/</b>check-in</code></button>
-            <button type="button" class="command" data-command="ping"><code><b>/</b>ping</code></button>
-          </div>
-          <div class="log-content" id="log-content">
-            <div class="log-head" aria-hidden="true"><span>Time / latency</span><span>Worker reply</span></div>
-            <p id="activity-empty" class="empty">Ready to run a command.</p>
-            <ol class="activity-list" id="activity-list" aria-label="Command runs" hidden></ol>
-            <span id="reply" class="sr-only" role="status"></span>
-          </div>
-          <noscript><p class="empty">Enable JavaScript to run commands.</p></noscript>
-        </section>
-        <aside class="reference" aria-label="Discord and command reference">
-          <section class="status-panel" aria-labelledby="discord-title">
-            <h2 id="discord-title">Discord integration</h2>
-            <p id="signing-key" class="key-status" data-state="checking">Checking Discord setup</p>
-            <a href="#setup" class="text-action">Open setup <span aria-hidden="true">→</span></a>
-          </section>
-          <section class="command-reference" aria-labelledby="command-title">
-            <h2 id="command-title">Commands</h2>
-            <dl>
-              <div><dt><code>/check-in</code></dt><dd>Acknowledges a daily check-in.</dd></div>
-              <div><dt><code>/ping</code></dt><dd>Checks that the Worker responds.</dd></div>
-            </dl>
-          </section>
-        </aside>
+  <main class="view-root" id="console">
+    <header class="dash-header">
+      <div class="dash-title-group">
+        <div class="bot-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></div>
+        <div>
+          <h1 class="dash-title">Discord Bot Starter</h1>
+          <p class="dash-subtitle">Test slash commands and connect your bot.</p>
+        </div>
       </div>
-    </section>
-
-    <section id="setup" aria-labelledby="setup-title" hidden>
-      <header class="page-heading">
-        <div><h1 id="setup-title">Connect Discord</h1><p>Set up a Discord app to run Roll Call in your server.</p></div>
-        <a class="external" href="https://discord.com/developers/applications">Developer Portal <span aria-hidden="true">↗</span></a>
-      </header>
-      <div class="dashboard setup-dashboard">
-        <section class="setup-panel" aria-labelledby="steps-title">
-          <div class="panel-heading"><h2 id="steps-title">Installation</h2></div>
-          <ol class="steps">
-            <li><div><h3>Create a Discord app</h3><p>Enable Guild Install with the <code>applications.commands</code> scope. Use the install link to add the app to a server you administer.</p></div></li>
-            <li><div><h3>Add your Discord credentials</h3><p>Copy the Application ID and Public Key from General Information, and the token from Bot. Save all three in the Freecode setup card and publish your site.</p></div></li>
-            <li><div><h3>Connect Discord and try a command</h3><p>In General Information, set the Interactions Endpoint URL to your published endpoint and save. Roll Call registers its commands when Discord verifies the endpoint. Try <code>/ping</code> in your server.</p></div></li>
-          </ol>
-        </section>
-        <aside class="reference" aria-label="Endpoint">
-          <section class="status-panel">
-            <h2>Interactions endpoint</h2>
-            <p id="endpoint-description">Discord calls this route over public HTTPS.</p>
-            <code id="endpoint">/interactions</code>
-            <button type="button" id="copy-endpoint">Copy endpoint</button>
-            <span id="copy-status" class="sr-only" role="status"></span>
-          </section>
-        </aside>
+      <div class="dash-header-actions">
+        <a href="#setup" class="btn btn-secondary">Connect bot</a>
+        <button class="btn btn-primary" id="run-demo" type="button">Run demo</button>
       </div>
-    </section>
-    <footer class="footer"><a href="https://freecode.sh/templates/discord-roll-call">Roll Call on Freecode <span aria-hidden="true">↗</span></a></footer>
+    </header>
+    <div class="dash-grid">
+      <section class="panel" aria-labelledby="commands-heading">
+        <header class="panel-head"><h2 class="panel-title" id="commands-heading">Slash commands</h2></header>
+        <div class="panel-body cmd-list">
+          <article class="cmd-card">
+            <h3 class="cmd-name">/ping</h3>
+            <p class="cmd-desc">Checks that the Worker responds.</p>
+            <div class="cmd-actions"><button class="btn btn-secondary btn-sm" data-command="ping" type="button">Run /ping</button></div>
+          </article>
+          <article class="cmd-card">
+            <h3 class="cmd-name">/check-in</h3>
+            <p class="cmd-desc">Acknowledges a daily check-in.</p>
+            <div class="cmd-actions"><button class="btn btn-secondary btn-sm" data-command="check-in" type="button">Run /check-in</button></div>
+          </article>
+        </div>
+      </section>
+      <div class="stage-stack">
+        <section class="discord-stage" aria-labelledby="replies-heading">
+          <header class="discord-topbar">
+            <h2 class="discord-channel" id="replies-heading"><span class="discord-hash" aria-hidden="true">#</span> bot-testing</h2>
+          </header>
+          <div class="discord-feed">
+            <p class="discord-empty" id="activity-empty">Run a command to see its reply here.</p>
+            <ol id="activity-list" aria-label="Command replies"></ol>
+          </div>
+          <footer class="discord-footer-bar">
+            <span class="visually-hidden" id="reply" role="status"></span>
+            <button type="button" id="reset" class="btn btn-sm" disabled>Clear replies</button>
+          </footer>
+        </section>
+        <section class="panel setup-guide" id="setup" aria-labelledby="setup-heading">
+          <header class="panel-head">
+            <h2 class="panel-title" id="setup-heading">Setup guide</h2>
+            <a class="guide-link" href="https://discord.com/developers/applications" target="_blank" rel="noreferrer">Developer Portal <span aria-hidden="true">↗</span></a>
+          </header>
+          <div class="panel-body">
+            <ol class="guide-steps">
+              <li><span class="step-number" aria-hidden="true">1</span><h3>Create a Discord app</h3><p>Enable Guild Install with the <code>applications.commands</code> scope and add the app to your server.</p></li>
+              <li><span class="step-number" aria-hidden="true">2</span><h3>Save credentials</h3><p>In Freecode, add the Application ID, bot token, and public key to the setup card. Then publish.</p></li>
+              <li><span class="step-number" aria-hidden="true">3</span><h3>Set the endpoint</h3><p>Paste the URL below into Discord’s Interactions Endpoint URL. Discord’s verification triggers command registration.</p></li>
+            </ol>
+            <div class="setup-endpoint">
+              <div>
+                <strong>Interactions Endpoint URL</strong>
+                <code id="endpoint">/interactions</code>
+              </div>
+              <div>
+                <output id="signing-key" data-state="loading">Checking credentials</output>
+                <button id="copy-endpoint" type="button" class="btn btn-secondary btn-sm">Copy endpoint</button>
+              </div>
+              <p id="endpoint-description" hidden></p>
+              <p id="copy-status" class="visually-hidden" role="status"></p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
   </main>
+  <template id="reply-template">
+    <li class="discord-msg">
+      <span class="discord-avatar" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></span>
+      <div class="discord-msg-body">
+        <div class="discord-slash-ref">You ran <code class="discord-slash-pill"></code></div>
+        <div class="discord-author-row"><strong class="discord-author">Discord Bot Starter</strong><span class="discord-app-tag">APP</span><time class="discord-time"></time></div>
+        <p class="discord-text"></p>
+      </div>
+    </li>
+  </template>
+  <script type="module" src="/demo.js"></script>
 </body>
 </html>

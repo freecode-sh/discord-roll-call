@@ -1,14 +1,14 @@
 {
   "template": {
     "slug": "discord-roll-call",
-    "title": "Roll Call for Discord",
-    "description": "A Discord bot starter with signed slash commands, a live command console, and a guided setup.",
+    "title": "Discord Bot Starter",
+    "description": "Run two slash commands and connect your Discord bot.",
     "tags": ["Discord", "Bots", "JavaScript"],
-    "cover": { "path": "docs/art/catalog-cover.webp", "caption": "Roll Call command console" },
+    "cover": { "path": "docs/art/catalog-cover.webp", "caption": "Discord Bot Starter cover" },
     "screenshots": [
-      { "path": "docs/art/console.webp", "caption": "Command console with live Worker replies" },
-      { "path": "docs/art/setup.webp", "caption": "Discord installation and interaction endpoint" },
-      { "path": "docs/art/console-mobile.webp", "caption": "Command console on mobile" }
+      { "path": "docs/art/console.webp", "caption": "Dashboard" },
+      { "path": "docs/art/setup.webp", "caption": "Setup guide" },
+      { "path": "docs/art/console-mobile.webp", "caption": "Mobile dashboard" }
     ]
   },
   "workspace": { "runtime": "worker" }

@@ -61,12 +61,12 @@ export async function discordEndpoint(request, env, ctx) {
     // Discord sends a signed PING when saving the endpoint. Reply promptly and
     // upsert our commands in the background without overwriting other commands.
     ctx.waitUntil(registerCommands(env).catch(error => {
-      console.error('Roll Call command registration failed:', error.message)
+      console.error('Discord Bot Starter command registration failed:', error.message)
     }))
     return Response.json({ type: 1 })
   }
   if (interaction.type !== 2) return new Response('Unsupported interaction', { status: 400 })
 
-  const content = commandReply(interaction.data?.name) ?? 'Unknown Roll Call command.'
+  const content = commandReply(interaction.data?.name) ?? 'Unknown command.'
   return Response.json({ type: 4, data: { content, flags: 64, allowed_mentions: { parse: [] } } })
 }
