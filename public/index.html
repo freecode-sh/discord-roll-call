@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Try two Discord slash commands and connect your own bot.">
+  <meta name="description" content="Build a Discord bot with custom slash commands and test its replies before adding it to your server.">
   <title>Discord Bot Starter</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,15 +59,13 @@
         <section class="discord-stage" aria-labelledby="replies-heading">
           <header class="discord-topbar">
             <h2 class="discord-channel" id="replies-heading"><span class="discord-hash" aria-hidden="true">#</span> bot-testing</h2>
+            <button type="button" id="reset" class="btn btn-secondary btn-sm" disabled>Clear</button>
           </header>
           <div class="discord-feed">
             <p class="discord-empty" id="activity-empty">Run a command to see its reply here.</p>
             <ol id="activity-list" aria-label="Command replies"></ol>
           </div>
-          <footer class="discord-footer-bar">
-            <span class="visually-hidden" id="reply" role="status"></span>
-            <button type="button" id="reset" class="btn btn-sm" disabled>Clear</button>
-          </footer>
+          <span class="visually-hidden" id="reply" role="status"></span>
         </section>
       </div>
     </div>

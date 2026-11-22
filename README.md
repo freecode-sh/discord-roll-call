@@ -1,5 +1,7 @@
 # Discord Bot Starter
 
+[![Use template on Freecode](https://img.shields.io/badge/Freecode-Use_template-5865F2?style=flat-square)](https://freecode.sh/templates/discord-roll-call)
+
 Discord Bot Starter is a tiny starter for building Discord bots on Workers. `/check-in` acknowledges a daily check-in. `/ping` confirms the bot is online. Both replies are visible only to the person running the command. The same Worker serves a dashboard for testing commands and setting up Discord.
 
 ![Discord Bot Starter command console showing two successful replies](docs/art/console.webp)

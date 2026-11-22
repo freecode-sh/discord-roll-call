@@ -2,12 +2,13 @@
   "template": {
     "slug": "discord-roll-call",
     "title": "Discord Bot Starter",
-    "description": "Run two slash commands and connect your Discord bot.",
-    "tags": ["Discord", "Bots", "JavaScript"],
+    "description": "Build a Discord bot with custom slash commands and test its replies before adding it to your server.",
+    "tags": ["Discord", "Bots"],
     "cover": { "path": "docs/art/catalog-cover.webp", "caption": "Discord Bot Starter cover" },
     "screenshots": [
-      { "path": "docs/art/console.webp", "caption": "Dashboard" },
-      { "path": "docs/art/replies.webp", "caption": "Command replies" }
+      { "path": "docs/art/console.webp", "darkPath": "docs/art/console-dark.webp", "caption": "Dashboard", "dimensions": { "width": 1620, "height": 1080 } },
+      { "path": "docs/art/replies.webp", "darkPath": "docs/art/replies-dark.webp", "caption": "Command replies" },
+      { "path": "docs/art/mobile.webp", "darkPath": "docs/art/mobile-dark.webp", "caption": "Slash commands and replies on iPhone Air" }
     ]
   },
   "workspace": { "runtime": "worker" }
